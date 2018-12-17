@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--用内置服务获取后台的数据-->
+    <title>内置服务$Http</title>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+
+    <script type="text/javascript">
+        //定义一个模块
+        var app = angular.module('myApp',[]);
+        //2创建一个控制器
+        app.controller("myController",function ($scope,$http) {
+            //使用内置服务$http来发生ajax请求
+            $http.get('js/data.json').success(
+                function (response) {
+                    $scope.list=response;
+
+                }
+            )
+
+        });
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<table>
+    <tr>
+        <td>用户的ID</td>
+        <td>shuxue</td>
+        <td>yuwen</td>
+    </tr>
+    <tr ng-repeat="item in list">
+        <td>{{item.id}}</td>
+        <td>{{item.shuxue}}</td>
+        <td>{{item.yuwen}}</td>
+    </tr>
+</table>
+</body>
+</html>

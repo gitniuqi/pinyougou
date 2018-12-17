@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环</title>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+
+    <script type="text/javascript">
+        //定义一个模块
+        var app = angular.module('myApp',[]);
+        //2创建一个控制器
+        app.controller("myController",function ($scope) {
+            $scope.list=[{"id":1,"shuxue":30,"yuwen":10},{"id":2,"shuxue":40,"yuwen":60}];//定义一个数组
+        });
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<table>
+    <tr>
+        <td>用户的ID</td>
+        <td>shuxue</td>
+        <td>yuwen</td>
+    </tr>
+    <tr ng-repeat="item in list">
+        <td>{{item.id}}</td>
+        <td>{{item.shuxue}}</td>
+        <td>{{item.yuwen}}</td>
+    </tr>
+</table>
+</body>
+</html>

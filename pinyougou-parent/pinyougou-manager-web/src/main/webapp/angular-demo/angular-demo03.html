@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器</title>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript">
+        //定义一个控制器 理解成js函数
+        //$scope就是建立 控制器（js函数）和视图（html）的桥梁
+        var myController=function($scope) {
+            $scope.z=1;
+        }
+    </script>
+</head>
+<body ng-app ng-controller="myController">
+    z的值是多少：{{z}}
+</body>
+</html>

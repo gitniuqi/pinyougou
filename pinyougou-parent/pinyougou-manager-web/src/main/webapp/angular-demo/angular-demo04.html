@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义模块的控制器使用</title>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript">
+        //1先自定义一个模块
+        var myApp = angular.module('myApp',[]);
+        //2创建一个控制器
+        //类似 var myController=funcation($scope){}
+        myApp.controller("myController",function ($scope) {
+            //function j(){};
+            //相当于 var add=function(){}
+            $scope.add=function(){
+                return (parseInt($scope.x)+parseInt($scope.y));
+            }
+        })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+    x的值 <input type="text" ng-model="x">
+    y的值 <input type="text" ng-model="y">
+
+    {{add()}}
+
+
+</body>
+</html>

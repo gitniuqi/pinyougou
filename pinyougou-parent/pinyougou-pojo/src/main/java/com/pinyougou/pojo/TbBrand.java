@@ -9,6 +9,15 @@ public class TbBrand implements Serializable {
 
     private String firstChar;
 
+    @Override
+    public String toString() {
+        return "TbBrand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", firstChar='" + firstChar + '\'' +
+                '}';
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

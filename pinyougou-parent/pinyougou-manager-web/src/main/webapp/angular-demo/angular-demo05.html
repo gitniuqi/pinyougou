@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令事件</title>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+
+    <script type="text/javascript">
+        //定义一个模块
+        var myApp = angular.module('myApp',[]);
+        //2创建一个控制器
+        myApp.controller("myController",function ($scope) {
+
+                $scope.add=function(){
+                    $scope.z=(parseInt($scope.x)+parseInt($scope.y));
+                }
+
+        })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+x的值	<input type="text" ng-model="x" >
+y的值<input type="text" ng-model="y">
+<!--click是点击事件指令-->
+<button ng-click="add()">请算出来的多少</button>
+值:{{z}}
+
+</body>
+</html>
