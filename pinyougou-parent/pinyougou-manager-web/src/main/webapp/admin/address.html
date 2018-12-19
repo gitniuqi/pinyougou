@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js">  </script>
+    <!-- 分页组件开始 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+	<!-- 分页组件结束 -->
+    
+    
+    <script type="text/javascript" src="../js/base_pagination.js">  </script>
+    <script type="text/javascript" src="../js/service/addressService.js">  </script>
+    <script type="text/javascript" src="../js/controller/baseController.js">  </script>
+    <script type="text/javascript" src="../js/controller/addressController.js">  </script>
+    
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="addressController" >
+  <!-- .box-body -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">管理</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <div class="has-feedback">							       
+                                </div>
+                            </div>
+                            <!--工具栏/-->
+
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+			                              <th class="" style="padding-right:0px">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                              </th> 
+										                               <th class="sorting"></th>			
+                             <th class="sorting">用户ID</th>			
+                             <th class="sorting">省</th>			
+                             <th class="sorting">市</th>			
+                             <th class="sorting">县/区</th>			
+                             <th class="sorting">手机</th>			
+                             <th class="sorting">详细地址</th>			
+                             <th class="sorting">联系人</th>			
+                             <th class="sorting">是否是默认 1默认 0否</th>			
+                             <th class="sorting">备注</th>			
+                             <th class="sorting">创建日期</th>			
+                             <th class="sorting">别名</th>			
+								     				
+					                      <th class="text-center">操作</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
+				                                                       <td>{{entity.id}}</td>			
+                             <td>{{entity.userId}}</td>			
+                             <td>{{entity.provinceId}}</td>			
+                             <td>{{entity.cityId}}</td>			
+                             <td>{{entity.townId}}</td>			
+                             <td>{{entity.mobile}}</td>			
+                             <td>{{entity.address}}</td>			
+                             <td>{{entity.contact}}</td>			
+                             <td>{{entity.isDefault}}</td>			
+                             <td>{{entity.notes}}</td>			
+                             <td>{{entity.createDate}}</td>			
+                             <td>{{entity.alias}}</td>			
+		                                 
+		                                  <td class="text-center">                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(entity.id)" >修改</button>                                           
+		                                  </td>
+			                          </tr>									 
+			                      </tbody>
+			                  </table>
+			                  <!--数据列表/-->                        
+                        </div>
+                        <!-- 数据表格 /-->
+                        <!-- 分页 -->
+						<tm-pagination conf="paginationConf"></tm-pagination>
+                     </div>
+                    <!-- /.box-body -->
+         
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">编辑</h3>
+		</div>
+		<div class="modal-body">	
+			 <table class="table table-bordered table-striped"  width="800px">			
+		      	  		      	<tr>
+                             
+<td>用户ID</td>
+
+                             <td><input  class="form-control" ng-model="entity.userId" placeholder="用户ID" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>省</td>
+
+                             <td><input  class="form-control" ng-model="entity.provinceId" placeholder="省" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>市</td>
+
+                             <td><input  class="form-control" ng-model="entity.cityId" placeholder="市" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>县/区</td>
+
+                             <td><input  class="form-control" ng-model="entity.townId" placeholder="县/区" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>手机</td>
+
+                             <td><input  class="form-control" ng-model="entity.mobile" placeholder="手机" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>详细地址</td>
+
+                             <td><input  class="form-control" ng-model="entity.address" placeholder="详细地址" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>联系人</td>
+
+                             <td><input  class="form-control" ng-model="entity.contact" placeholder="联系人" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>是否是默认 1默认 0否</td>
+
+                             <td><input  class="form-control" ng-model="entity.isDefault" placeholder="是否是默认 1默认 0否" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>备注</td>
+
+                             <td><input  class="form-control" ng-model="entity.notes" placeholder="备注" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>创建日期</td>
+
+                             <td><input  class="form-control" ng-model="entity.createDate" placeholder="创建日期" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>别名</td>
+
+                             <td><input  class="form-control" ng-model="entity.alias" placeholder="别名" ></td>
+
+                        </tr>		
+		  		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+   
+</body>
+</html>

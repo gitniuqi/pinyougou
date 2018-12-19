@@ -14,8 +14,17 @@
 	<script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
 	<!--分页组建开始-->
 	<script src="../plugins/angularjs/pagination.js"></script>
+	<script src="../plugins/angularjs/pagination.js"></script>
 	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
 	<!--分页组建结束-->
+	<!--导入自定义的js组件开始-->
+	<script src="../js/base-pagination.js"></script>
+
+	<script src="../js/service/brandService.js"></script>
+	<script src="../js/controller/baseController.js"></script>
+	<script src="../js/controller/brandController.js"></script>
+
+	<!--导入自定义的js组件结束-->
 	<!--编写js代码-->
 	<script type="text/javascript">
 		//var app = angular.module('pinyougou',[]);
@@ -30,16 +39,15 @@
                 );
             };
 
-            //重新加载列表 数据
+            /*//重新加载列表 数据
             $scope.reloadList=function(){
                 //切换页码
                 $scope.findPage( $scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-            };
+            };*/
 
-          /*  $scope.reloadList=function(){
+            $scope.reloadList=function(){
                 $scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
             }
-*/
 
             //分页控件配置
             $scope.paginationConf = {
@@ -62,17 +70,17 @@
                 );
             };
 
-           /* //这个是搜索的处理
+            //这个是搜索的处理
             $scope.searchEntity={};//定义搜索对象为空对象防止传递给null的情况。
             //要从参数的调用中传入数据 page rows
             $scope.search=function (page, rows) {
-                $http.post('../brand/search.do?page='+page+'&rows'+rows,$scope.searchEntity).success(
+                $http.post('../brand/search.do?page='+page+'&rows='+rows,$scope.searchEntity).success(
                     function (response) {
                         $scope.paginationConf.totalItems=response.total;//将总记录数放入上面的分页控件配置
                         $scope.list=response.rows;//给列表变量赋值
                     }
                 )
-            }*/
+            }
 
             //保存
             $scope.save=function(){
@@ -130,13 +138,7 @@
                     }
                 );
             }
-
-
-
-
-
         });
-
 	</script>
     
 </head>
@@ -149,12 +151,7 @@ ng-controller 指令用于为你的应用添加控制器。
                         <h3 class="box-title">品牌管理</h3>
                     </div>
 
-					  <div class="has-feedback">
-						  品牌名称：<input type="text" ng-model="searchEntity.name">
-						  首字母：<input type="text"   ng-model="searchEntity.firstChar">
-						  <button class="btn btn-default" ng-click=" search(1,paginationConf.itemsPerPage)
-																">搜索</button>
-					  </div>
+
 
                     <div class="box-body">
 
@@ -173,7 +170,9 @@ ng-controller 指令用于为你的应用添加控制器。
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-							                                         
+										品牌名称：<input type="text" ng-model="searchEntity.name">
+										首字母：<input type="text"   ng-model="searchEntity.firstChar">
+										<button class="btn btn-default" ng-click="search(1,paginationConf.itemsPerPage)">搜索</button>
                                 </div>
                             </div>
                             <!--工具栏/-->

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TbSpecificationOptionExample {
-    protected String orderByClause;
+    protected String orderByClause; // 有序的条款
 
-    protected boolean distinct;
+    protected boolean distinct; //区别
 
-    protected List<Criteria> oredCriteria;
+   protected List<Criteria> oredCriteria;  // 标准
 
     public TbSpecificationOptionExample() {
         oredCriteria = new ArrayList<Criteria>();

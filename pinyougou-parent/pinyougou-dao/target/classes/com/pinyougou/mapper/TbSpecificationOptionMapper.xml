@@ -104,6 +104,7 @@
     values (#{id,jdbcType=BIGINT}, #{optionName,jdbcType=VARCHAR}, #{specId,jdbcType=BIGINT}, 
       #{orders,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbSpecificationOption" >
     insert into tb_specification_option
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -135,6 +136,7 @@
       </if>
     </trim>
   </insert>
+
   <select id="countByExample" parameterType="com.pinyougou.pojo.TbSpecificationOptionExample" resultType="java.lang.Integer" >
     select count(*) from tb_specification_option
     <if test="_parameter != null" >

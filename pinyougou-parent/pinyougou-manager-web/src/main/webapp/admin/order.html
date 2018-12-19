@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js">  </script>
+    <!-- 分页组件开始 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+	<!-- 分页组件结束 -->
+    
+    
+    <script type="text/javascript" src="../js/base_pagination.js">  </script>
+    <script type="text/javascript" src="../js/service/orderService.js">  </script>
+    <script type="text/javascript" src="../js/controller/baseController.js">  </script>
+    <script type="text/javascript" src="../js/controller/orderController.js">  </script>
+    
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController" >
+  <!-- .box-body -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">管理</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <div class="has-feedback">							       
+                                </div>
+                            </div>
+                            <!--工具栏/-->
+
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+			                              <th class="" style="padding-right:0px">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                              </th> 
+										                               <th class="sorting">订单id</th>			
+                             <th class="sorting">实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分</th>			
+                             <th class="sorting">支付类型，1、在线支付，2、货到付款</th>			
+                             <th class="sorting">邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分</th>			
+                             <th class="sorting">状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价</th>			
+                             <th class="sorting">订单创建时间</th>			
+                             <th class="sorting">订单更新时间</th>			
+                             <th class="sorting">付款时间</th>			
+                             <th class="sorting">发货时间</th>			
+                             <th class="sorting">交易完成时间</th>			
+                             <th class="sorting">交易关闭时间</th>			
+                             <th class="sorting">物流名称</th>			
+                             <th class="sorting">物流单号</th>			
+                             <th class="sorting">用户id</th>			
+                             <th class="sorting">买家留言</th>			
+                             <th class="sorting">买家昵称</th>			
+                             <th class="sorting">买家是否已经评价</th>			
+                             <th class="sorting">收货人地区名称(省，市，县)街道</th>			
+                             <th class="sorting">收货人手机</th>			
+                             <th class="sorting">收货人邮编</th>			
+                             <th class="sorting">收货人</th>			
+                             <th class="sorting">过期时间，定期清理</th>			
+                             <th class="sorting">发票类型(普通发票，电子发票，增值税发票)</th>			
+                             <th class="sorting">订单来源：1:app端，2：pc端，3：M端，4：微信端，5：手机qq端</th>			
+                             <th class="sorting">商家ID</th>			
+								     				
+					                      <th class="text-center">操作</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.order_id)"></td>			                              
+				                                                       <td>{{entity.orderId}}</td>			
+                             <td>{{entity.payment}}</td>			
+                             <td>{{entity.paymentType}}</td>			
+                             <td>{{entity.postFee}}</td>			
+                             <td>{{entity.status}}</td>			
+                             <td>{{entity.createTime}}</td>			
+                             <td>{{entity.updateTime}}</td>			
+                             <td>{{entity.paymentTime}}</td>			
+                             <td>{{entity.consignTime}}</td>			
+                             <td>{{entity.endTime}}</td>			
+                             <td>{{entity.closeTime}}</td>			
+                             <td>{{entity.shippingName}}</td>			
+                             <td>{{entity.shippingCode}}</td>			
+                             <td>{{entity.userId}}</td>			
+                             <td>{{entity.buyerMessage}}</td>			
+                             <td>{{entity.buyerNick}}</td>			
+                             <td>{{entity.buyerRate}}</td>			
+                             <td>{{entity.receiverAreaName}}</td>			
+                             <td>{{entity.receiverMobile}}</td>			
+                             <td>{{entity.receiverZipCode}}</td>			
+                             <td>{{entity.receiver}}</td>			
+                             <td>{{entity.expire}}</td>			
+                             <td>{{entity.invoiceType}}</td>			
+                             <td>{{entity.sourceType}}</td>			
+                             <td>{{entity.sellerId}}</td>			
+		                                 
+		                                  <td class="text-center">                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(entity.order_id)" >修改</button>                                           
+		                                  </td>
+			                          </tr>									 
+			                      </tbody>
+			                  </table>
+			                  <!--数据列表/-->                        
+                        </div>
+                        <!-- 数据表格 /-->
+                        <!-- 分页 -->
+						<tm-pagination conf="paginationConf"></tm-pagination>
+                     </div>
+                    <!-- /.box-body -->
+         
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">编辑</h3>
+		</div>
+		<div class="modal-body">	
+			 <table class="table table-bordered table-striped"  width="800px">			
+		      	  		      	<tr>
+                             
+<td>实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分</td>
+
+                             <td><input  class="form-control" ng-model="entity.payment" placeholder="实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>支付类型，1、在线支付，2、货到付款</td>
+
+                             <td><input  class="form-control" ng-model="entity.paymentType" placeholder="支付类型，1、在线支付，2、货到付款" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分</td>
+
+                             <td><input  class="form-control" ng-model="entity.postFee" placeholder="邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价</td>
+
+                             <td><input  class="form-control" ng-model="entity.status" placeholder="状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭,7、待评价" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>订单创建时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.createTime" placeholder="订单创建时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>订单更新时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.updateTime" placeholder="订单更新时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>付款时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.paymentTime" placeholder="付款时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>发货时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.consignTime" placeholder="发货时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>交易完成时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.endTime" placeholder="交易完成时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>交易关闭时间</td>
+
+                             <td><input  class="form-control" ng-model="entity.closeTime" placeholder="交易关闭时间" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>物流名称</td>
+
+                             <td><input  class="form-control" ng-model="entity.shippingName" placeholder="物流名称" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>物流单号</td>
+
+                             <td><input  class="form-control" ng-model="entity.shippingCode" placeholder="物流单号" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>用户id</td>
+
+                             <td><input  class="form-control" ng-model="entity.userId" placeholder="用户id" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>买家留言</td>
+
+                             <td><input  class="form-control" ng-model="entity.buyerMessage" placeholder="买家留言" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>买家昵称</td>
+
+                             <td><input  class="form-control" ng-model="entity.buyerNick" placeholder="买家昵称" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>买家是否已经评价</td>
+
+                             <td><input  class="form-control" ng-model="entity.buyerRate" placeholder="买家是否已经评价" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>收货人地区名称(省，市，县)街道</td>
+
+                             <td><input  class="form-control" ng-model="entity.receiverAreaName" placeholder="收货人地区名称(省，市，县)街道" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>收货人手机</td>
+
+                             <td><input  class="form-control" ng-model="entity.receiverMobile" placeholder="收货人手机" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>收货人邮编</td>
+
+                             <td><input  class="form-control" ng-model="entity.receiverZipCode" placeholder="收货人邮编" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>收货人</td>
+
+                             <td><input  class="form-control" ng-model="entity.receiver" placeholder="收货人" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>过期时间，定期清理</td>
+
+                             <td><input  class="form-control" ng-model="entity.expire" placeholder="过期时间，定期清理" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>发票类型(普通发票，电子发票，增值税发票)</td>
+
+                             <td><input  class="form-control" ng-model="entity.invoiceType" placeholder="发票类型(普通发票，电子发票，增值税发票)" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>订单来源：1:app端，2：pc端，3：M端，4：微信端，5：手机qq端</td>
+
+                             <td><input  class="form-control" ng-model="entity.sourceType" placeholder="订单来源：1:app端，2：pc端，3：M端，4：微信端，5：手机qq端" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td>商家ID</td>
+
+                             <td><input  class="form-control" ng-model="entity.sellerId" placeholder="商家ID" ></td>
+
+                        </tr>		
+		  		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+   
+</body>
+</html>

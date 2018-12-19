@@ -1,107 +1,117 @@
 package com.pinyougou.sellergoods.service.impl;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbBrandMapper;
-import com.pinyougou.pojo.TbAddressExample;
 import com.pinyougou.pojo.TbBrand;
 import com.pinyougou.pojo.TbBrandExample;
-import com.pinyougou.service.BrandService;
+import com.pinyougou.pojo.TbBrandExample.Criteria;
+import com.pinyougou.sellergoods.service.BrandService;
+
 import entity.PageResult;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
-@Service //alibaba
+/**
+ * 服务实现层
+ * @author Administrator
+ *
+ */
+@Service
 public class BrandServiceImpl implements BrandService {
-    //逆向工程 生成TbBrandExample
-    @Autowired
-    private TbBrandMapper tbBrandMapper;
-    @Override
-    public List<TbBrand> findAll() {
-        // 查询通过例子参数为空 表示查询所有
-        List<TbBrand> tbBrands = tbBrandMapper.selectByExample(null);
-        return  tbBrands;
-    }
 
-    /**
-     * 分页查询 修改成要条件查询 模糊查询
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    public PageResult findPage(int pageNum, int pageSize) {
-        //用到了pagehelper
-        PageHelper.startPage(pageNum,pageSize);
-        //需要分页的语句
-        Page<TbBrand> page = (Page<TbBrand>) tbBrandMapper.selectByExample(null);
-        PageResult pageResult = new PageResult(page.getTotal(), page.getResult());
-        return pageResult;
-    }
+	@Autowired
+	private TbBrandMapper brandMapper;
+	
+	/**
+	 * 查询全部
+	 */
+	@Override
+	public List<TbBrand> findAll() {
+		return brandMapper.selectByExample(null);
+	}
 
+	/**
+	 * 按分页查询
+	 */
+	@Override
+	public PageResult findPage(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);		
+		Page<TbBrand> page=   (Page<TbBrand>) brandMapper.selectByExample(null);
+		return new PageResult(page.getTotal(), page.getResult());
+	}
 
-    @Override
-    public PageResult findPage(TbBrand brand, int pageNum, int pageSize) {
-        //用到了pagehelper
-        PageHelper.startPage(pageNum,pageSize);
-        //new的一个pojo类
-        TbBrandExample example = new TbBrandExample();
-        TbBrandExample.Criteria criteria = example.createCriteria();
+	/**
+	 * 增加
+	 */
+	@Override
+	public void add(TbBrand brand) {
+		brandMapper.insert(brand);		
+	}
 
-        if (brand!=null){
-            if (brand.getName()!=null && brand.getFirstChar().length()>0){
-                criteria.andNameLike("%"+brand.getName()+"%");
-            }
-            if (brand.getFirstChar()!=null&&brand.getFirstChar().length()>0){
-                criteria.andFirstCharEqualTo(brand.getFirstChar());
-            }
-        }
-        //需要分页的语句
-        Page<TbBrand> page = (Page<TbBrand>) tbBrandMapper.selectByExample(null);
-        PageResult pageResult = new PageResult(page.getTotal(), page.getResult());
-        return pageResult;
-    }
+	
+	/**
+	 * 修改
+	 */
+	@Override
+	public void update(TbBrand brand){
+		brandMapper.updateByPrimaryKey(brand);
+	}	
+	
+	/**
+	 * 根据ID获取实体
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public TbBrand findOne(Long id){
+		return brandMapper.selectByPrimaryKey(id);
+	}
 
+	/**
+	 * 批量删除
+	 */
+	@Override
+	public void delete(Long[] ids) {
+		for(Long id:ids){
+			brandMapper.deleteByPrimaryKey(id);
+		}		
+	}
+	
+	
+		@Override
+	public PageResult findPage(TbBrand brand, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		
+		TbBrandExample example=new TbBrandExample();
+		Criteria criteria = example.createCriteria();
+		
+		if(brand!=null){			
+						if(brand.getName()!=null && brand.getName().length()>0){
+				criteria.andNameLike("%"+brand.getName()+"%");
+			}
+			if(brand.getFirstChar()!=null && brand.getFirstChar().length()>0){
+				criteria.andFirstCharLike("%"+brand.getFirstChar()+"%");
+			}
+	
+		}
+		
+		Page<TbBrand> page= (Page<TbBrand>)brandMapper.selectByExample(example);		
+		return new PageResult(page.getTotal(), page.getResult());
+	}
 
-    /**
-     * 添加评判的实现类在service
-     * @param brand
-     */
-    @Override
-    public void add(TbBrand brand) {
-        //调用逆向工程中dao 的insert(brand)方法 表示添加brand到breand表中
-        tbBrandMapper.insert(brand);
-    }
+	/**
+	 *
+	 * @return
+	 */
+	@Override
+	public List<Map> selectOptionList() {
+		//看 我写的select语句
+		//select id,name as text from tb_brand
+		List<Map> maps = brandMapper.selectOptionList();
+		return maps;
+	}
 
-    /**
-     * 跟新品牌
-     * @param brand
-     */
-    @Override
-    public void update(TbBrand brand) {
-        tbBrandMapper.updateByPrimaryKey(brand);
-    }
-
-    /**
-     * 根据id获得实体
-     * @param id
-     * @return
-     */
-    @Override
-    public TbBrand findOne(Long id) {
-        return tbBrandMapper.selectByPrimaryKey(id);
-    }
-
-    /**
-     * 根据id数组遍历删除品牌
-     * @param ids
-     */
-    @Override
-    public void delete(Long[] ids) {
-        //遍历数组
-        for (Long id : ids) {
-            tbBrandMapper.deleteByPrimaryKey(id);
-        }
-    }
 }

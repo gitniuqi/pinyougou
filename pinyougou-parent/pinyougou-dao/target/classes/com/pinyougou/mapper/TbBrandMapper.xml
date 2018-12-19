@@ -87,6 +87,8 @@
     from tb_brand
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_brand
     where id = #{id,jdbcType=BIGINT}
@@ -178,4 +180,9 @@
       first_char = #{firstChar,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--自定义查询brand表中的所有名字和对应的id-->
+  <select id="selectOptionList" resultType="java.util.Map">
+    select id,name as text from tb_brand
+  </select>
 </mapper>

@@ -96,11 +96,20 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pinyougou.pojo.TbSpecification" >
+  <insert id="insert" parameterType="com.pinyougou.pojo.TbSpecification" useGeneratedKeys="true" keyProperty="id">
+
+    <!--<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>-->
+
     insert into tb_specification (id, spec_name)
     values (#{id,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbSpecification" >
+
+
+
+
+  <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbSpecification" useGeneratedKeys="true" keyProperty="id" >
     insert into tb_specification
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
