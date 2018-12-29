@@ -1,8 +1,35 @@
- //控制层 
-app.controller('contentController' ,function($scope,$controller   ,contentService){	
+ //控制层 manager
+app.controller('contentController' ,function($scope,$controller,uploadService,contentService,contentCategoryService){
 	
 	$controller('baseController',{$scope:$scope});//继承
-	
+
+	$scope.status=["无效","有效"];
+	//上传广告图
+	$scope.uploadFile=function () {
+		uploadService.uploadFile().success(
+			function (response) {//?resturs
+				if (response.success){
+					$scope.entity.pic=response.message;
+				}else {
+					alert("上传失败");
+				}
+            }
+		).error(
+			function () {
+				alert("上传错误");
+            }
+		)
+    };
+
+	//加载广告分类列表
+	$scope.findContentCategoryList=function () {
+        contentCategoryService.findAll().success(
+			function (response) {//List<tbcontentCateogry>
+				$scope.contentCategoryList=response;
+            }
+		)
+    };
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		contentService.findAll().success(
@@ -10,7 +37,7 @@ app.controller('contentController' ,function($scope,$controller   ,contentServic
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -29,7 +56,7 @@ app.controller('contentController' ,function($scope,$controller   ,contentServic
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				

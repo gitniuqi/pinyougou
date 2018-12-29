@@ -1,6 +1,7 @@
 package com.pinyougou.sellergoods.controller;
 import java.util.List;
 
+import com.pinyougou.pojo.TbBrand;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,19 @@ public class ItemCatController {
 
 	@Reference
 	private ItemCatService itemCatService;
+
+
+	/**
+	 * 通过parentId查询到他的所有儿子
+	 * @param parentId
+	 * @return
+	 */
+	@RequestMapping("/findByParentId")
+	public List<TbItemCat> findByParentId(Long parentId){
+		//调用自己写的方法
+		List<TbItemCat> TbItemCats = itemCatService.findByParentId(parentId);
+		return TbItemCats; //传出去了
+	}
 	
 	/**
 	 * 返回全部列表
@@ -101,7 +115,7 @@ public class ItemCatController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param
 	 * @param page
 	 * @param rows
 	 * @return

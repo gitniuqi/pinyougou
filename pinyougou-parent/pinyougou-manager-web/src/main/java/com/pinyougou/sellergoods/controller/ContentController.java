@@ -1,12 +1,14 @@
 package com.pinyougou.sellergoods.controller;
 import java.util.List;
 
+
+import com.pinyougou.content.service.ContentService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.pojo.TbContent;
-import com.pinyougou.sellergoods.service.ContentService;
+
 
 import entity.PageResult;
 import entity.Result;
@@ -101,7 +103,7 @@ public class ContentController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param
 	 * @param page
 	 * @param rows
 	 * @return

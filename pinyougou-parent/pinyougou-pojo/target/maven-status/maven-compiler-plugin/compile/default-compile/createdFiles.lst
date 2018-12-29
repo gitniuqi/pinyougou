@@ -44,6 +44,7 @@ com\pinyougou\pojo\TbOrderExample$Criterion.class
 com\pinyougou\pojo\TbContentCategoryExample$Criterion.class
 com\pinyougou\pojo\TbSellerExample$Criteria.class
 com\pinyougou\pojo\TbGoodsExample.class
+com\pinyougou\pojogroup\Goods.class
 com\pinyougou\pojo\TbPayLogExample$Criterion.class
 com\pinyougou\pojo\TbItemCatExample$Criteria.class
 com\pinyougou\pojo\TbTypeTemplateExample.class

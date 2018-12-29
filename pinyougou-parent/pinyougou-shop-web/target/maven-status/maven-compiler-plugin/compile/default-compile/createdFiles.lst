@@ -1,0 +1,7 @@
+com\pinyougou\shop\controller\SellerController.class
+com\pinyougou\shop\security\UserDetailsServiceImpl.class
+com\pinyougou\shop\security\ManagerSecurityConfig.class
+com\pinyougou\shop\controller\ItemCatController.class
+com\pinyougou\shop\controller\TypeTemplateController.class
+com\pinyougou\shop\controller\GoodsController.class
+com\pinyougou\shop\controller\UploadController.class

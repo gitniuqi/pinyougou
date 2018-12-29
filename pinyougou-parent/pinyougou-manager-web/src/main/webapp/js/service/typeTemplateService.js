@@ -1,5 +1,10 @@
 //服务层
 app.service('typeTemplateService',function($http){
+
+    //在这里查询所有的类型id
+    this.selectAllTypeid=function () {
+        return $http.get('../typeTemplate/selectAllTypeid.do');
+    };
 	    	
 	//读取列表数据绑定到表单中
 	this.findAll=function(){

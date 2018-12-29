@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--这也是一个认证-->
+    <!--配置应用名 服务的消费方-->
+    <dubbo:application name="pingyougou-shop-web"></dubbo:application>
+
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
+
+    <context:component-scan base-package="com.pinyougou.shop.security"></context:component-scan>
+
+
+    <!--################引入生产着的服务#################-->
+    <dubbo:reference interface="com.pinyougou.sellergoods.service.SellerService" id="sellerService"></dubbo:reference>
+
+    <!--将自定义认证类通过set方法注册到spring容器中-->
+    <bean  class="com.pinyougou.shop.security.UserDetailsServiceImpl">
+        <property name="sellerService" ref="sellerService"></property>
+    </bean>
+
+    <bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
+</beans>

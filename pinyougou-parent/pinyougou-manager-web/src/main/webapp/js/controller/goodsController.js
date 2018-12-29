@@ -1,8 +1,38 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller   ,goodsService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
-	
+
+	//审核商品
+	$scope.status=['未审核','已审核','审核为通过','关闭'];//商品状态
+	$scope.itemCatList=[];//商品的分类列表
+	//查询商品分类
+	$scope.findItemCatList=function () {
+		itemCatService.findAll().success(
+			function (response) {
+				for (var i=0;i<response.length;i++){
+					$scope.itemCatList[response[i].id]=response[i].name;
+				}
+            }
+		)
+    };
+
+	//更改商品状态
+	$scope.updateStatus=function (status) {
+		//参数1选中的集合
+		goodsService.updateStatus($scope.selectIds,status).success(
+			function (response) {
+				if(response.success){
+					$scope.reloadList();
+					$scope.selectIds=[];
+				}else {
+					alert(response.message);
+				}
+
+            }
+		)
+    };
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		goodsService.findAll().success(

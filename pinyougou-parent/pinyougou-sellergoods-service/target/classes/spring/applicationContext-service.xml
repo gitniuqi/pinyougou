@@ -7,7 +7,7 @@
     <!--配置服务器名字-->
     <dubbo:application name="pinyougou-sellergoods-service"/>
     <!--配置注册中心-->
-    <dubbo:registry protocol="zookeeper" address="192.168.218.130" port="2181"></dubbo:registry>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
 
     <!--配置dubbo服务调用的端口-->
     <dubbo:protocol name="dubbo" port="20880"/>

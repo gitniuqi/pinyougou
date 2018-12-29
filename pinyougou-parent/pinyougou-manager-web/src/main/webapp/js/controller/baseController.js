@@ -20,7 +20,7 @@ app.controller('baseController' ,function($scope){
 	
 	$scope.selectIds=[];//选中的ID集合 
 
-	//更新复选
+	//更新复选 第一个参数是事件对象 第二参数是选中的下标
     $scope.updateSelection = function($event, id) {
         if($event.target.checked){//如果是被选中,则增加到数组
             $scope.selectIds.push( id);

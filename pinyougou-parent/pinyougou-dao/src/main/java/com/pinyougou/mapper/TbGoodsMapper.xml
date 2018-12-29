@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pinyougou.pojo.TbGoods" >
+  <insert id="insert" parameterType="com.pinyougou.pojo.TbGoods" useGeneratedKeys="true" keyProperty="id">
     insert into tb_goods (id, seller_id, goods_name, 
       default_item_id, audit_status, is_marketable, 
       brand_id, caption, category1_id, 

@@ -10,6 +10,15 @@ import entity.PageResult;
  */
 public interface ItemCatService {
 
+
+	/**
+	 * 在数据库中 是通过parentId关联起来的 所有要找他的parent
+	 * @param parentId
+	 * @return
+	 */
+
+	public List<TbItemCat> findByParentId(Long parentId);
+
 	/**
 	 * 返回全部列表
 	 * @return

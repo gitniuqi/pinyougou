@@ -1,5 +1,6 @@
 package com.pinyougou.sellergoods.controller;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,16 @@ public class TypeTemplateController {
 
 	@Reference
 	private TypeTemplateService typeTemplateService;
-	
+
+
+	/**
+	 * 查询所有的类型id封装到map集合中 只要类型的id
+	 * @return
+	 */
+	@RequestMapping("/selectAllTypeid")
+	public List<Map> selectAllTypeid(){
+		return typeTemplateService.selectAllTypeid();
+	}
 	/**
 	 * 返回全部列表
 	 * @return

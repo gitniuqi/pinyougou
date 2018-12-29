@@ -22,7 +22,23 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
-	
+
+	/**
+	 * 通过传入parentId查找到 是这个父亲的所有儿子
+	 * @param parentId
+	 * @return
+	 */
+	@Override
+	public List<TbItemCat> findByParentId(Long parentId) {
+		//不是查id 主键
+		//select * from tbitemcat where parentid = ?
+		TbItemCatExample example = new TbItemCatExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andParentIdEqualTo(parentId); //相当于 添加where parentid = parentId
+		List<TbItemCat> lists = itemCatMapper.selectByExample(example);
+		return lists;
+	}
+
 	/**
 	 * 查询全部
 	 */
