@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pinyougou-seckill-task:war">
+    <output-path>$PROJECT_DIR$/pinyougou-seckill-task/target</output-path>
+    <root id="archive" name="pinyougou-seckill-task.war">
+      <element id="artifact" artifact-name="pinyougou-seckill-task:war exploded" />
+    </root>
+  </artifact>
+</component>

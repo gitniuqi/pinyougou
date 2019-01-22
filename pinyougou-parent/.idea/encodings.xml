@@ -2,15 +2,37 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-cart-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-cart-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-cart-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-content-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-content-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-manager-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-order-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-order-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-page-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-page-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-page-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-pay-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-pay-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-pojo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-portal-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-search-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-search-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-search-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-seckill-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-seckill-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-seckill-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-seckill-task" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-seckill-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-sellergoods-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-sellergoods-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-shop-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-solr-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-user-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-user-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-user-web" charset="UTF-8" />
   </component>
 </project>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--配置应用名 服务消费方-->
+    <dubbo:application name="pinyougou-manager-web"/>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"/>
+    <!--引用服务 通过注解 @reference 扫描 即可引用 包含了组件扫描-->
+    <dubbo:annotation package="com.pinyougou.sellergoods.controller"/>
+    <!--设置消费者的调用超时时间-->
+    <dubbo:consumer timeout="100000"/>
+
+    <!--在web 消费者中还是要扫描 spring中的注解 生产者中不需要额外扫描了 因为通过dubbo扫描了-->
+    <context:component-scan base-package="com.pinyougou.sellergoods.controller"/>
+    <!--注解驱动 并设置要fastJson统一日期的输出格式 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json"/>
+                <property name="features">
+                    <array>
+                        <!--返回结果是包含null值 默认是过滤掉-->
+                    </array>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 配置多媒体解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
+    <context:property-placeholder location="classpath:config/*.properties"></context:property-placeholder>
+
+    <import resource="spring-applicationContext-producer.xml"></import>
+    <import resource="spring-security.xml"></import>
+</beans>

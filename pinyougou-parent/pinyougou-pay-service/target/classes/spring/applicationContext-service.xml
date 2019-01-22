@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--因为直接搜索solr索引域中内容所以不需要用到数据链路层-->
+    <!--因为是搜索 也用不到事务-->
+
+    <!--配置服务器名字-->
+    <dubbo:application name="pinyougou-pay-service"/>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
+
+    <!--配置dubbo服务调用的端口-->
+    <dubbo:protocol name="dubbo" port="20889"/>
+
+    <!--发布服务：注解的方式 扫描对应的包@service 将接口发布出去 -->
+    <dubbo:annotation package="com.pinyougou.pay.service"/>
+
+    <!--设置超时时间-->
+    <dubbo:provider timeout="100000"></dubbo:provider>
+</beans>

@@ -123,7 +123,7 @@
     </dependencies>
 
     <build>
-        <finalName>pinyougou-manager-web</finalName>
+        <finalName>pinyougou-shop-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

@@ -13,6 +13,13 @@
           <element id="archive" name="pinyougou-pojo-1.0-SNAPSHOT.jar">
             <element id="module-output" name="pinyougou-pojo" />
           </element>
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-solr:1.5.5.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpmime:4.2.2" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient-cache:4.2.2" />
+          <element id="library" level="project" name="Maven: org.apache.solr:solr-solrj:4.10.3" />
+          <element id="library" level="project" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7" />
+          <element id="library" level="project" name="Maven: org.noggit:noggit:0.5" />
           <element id="archive" name="pinyougou-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="pinyougou-common" />
           </element>

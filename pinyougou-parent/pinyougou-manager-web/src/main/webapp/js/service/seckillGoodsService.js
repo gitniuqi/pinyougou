@@ -1,4 +1,4 @@
-//服务层
+// 这是 拷贝所有的manager服务层
 app.service('seckillGoodsService',function($http){
 	    	
 	//读取列表数据绑定到表单中

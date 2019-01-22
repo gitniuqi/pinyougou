@@ -1,0 +1,3 @@
+com\pinyougou\page\listener\GenHTMLMessageListener.class
+com\pinyougou\page\service\impl\ItemPageServiceImpl.class
+com\pinyougou\page\listener\MyMessage2Listener.class

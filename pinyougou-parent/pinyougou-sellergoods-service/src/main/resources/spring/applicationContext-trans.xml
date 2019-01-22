@@ -30,4 +30,5 @@
 
     <import resource="classpath:spring/applicationContext-dao.xml"/>
     <import resource="applicationContext-service.xml"></import>
+    <import resource="applicationContext-redis.xml"></import>
 </beans>

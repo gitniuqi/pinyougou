@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.List;
 
 /**
- * 服务实现层
+ * 服务实现层  首页查询 图片(content)数据库 查询首页的图片保存在redis
  * @author Administrator
  *
  */

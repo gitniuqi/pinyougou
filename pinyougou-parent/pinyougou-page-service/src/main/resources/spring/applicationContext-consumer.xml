@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--真正可以产生connection的connectionFactory由对应的 JMS服务厂商提供 连接工厂 连接到mq的服务器-->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.25.133:61616"></property>
+    </bean>
+    <!--真正管理jms连接工厂的-->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"></property>
+    </bean>
+
+
+    <!--配置消费者消费那个邮筒 消息订阅-->
+    <bean id="freemarker_gen_html_topic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="freemarker_gen_html_topic"/>
+    </bean>
+
+    <!-- 我的监听类 -->
+    <bean id="genHTMLMessageListener" class="com.pinyougou.page.listener.GenHTMLMessageListener"></bean>
+
+    <!-- 消息监听容器 queue-->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="freemarker_gen_html_topic"/>
+        <property name="messageListener" ref="genHTMLMessageListener"/>
+    </bean>
+</beans>

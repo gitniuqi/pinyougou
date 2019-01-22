@@ -1,3 +1,4 @@
+com\pinyougou\sellergoods\controller\GoodsController$2.class
 com\pinyougou\sellergoods\controller\ItemController.class
 com\pinyougou\sellergoods\controller\BrandController.class
 com\pinyougou\sellergoods\controller\ContentCategoryController.class
@@ -9,4 +10,5 @@ com\pinyougou\sellergoods\controller\LoginController.class
 com\pinyougou\sellergoods\controller\ItemCatController.class
 com\pinyougou\sellergoods\controller\SpecificationController.class
 com\pinyougou\sellergoods\security\ManagerSecurityConfig.class
+com\pinyougou\sellergoods\controller\GoodsController$1.class
 com\pinyougou\sellergoods\controller\GoodsController.class

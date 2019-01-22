@@ -19,6 +19,7 @@ import com.pinyougou.pojo.TbTypeTemplateExample.Criteria;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
 
 import entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 服务实现层
@@ -35,6 +36,29 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	@Autowired
 	private TbSpecificationOptionMapper specificationOptionMapper; //这里在dao系统中 通过mydatis的配置文件扫描dao/mapper包注册
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	/**
+	 * 在修改模板数据时 -》 35手机[{"id":27,"text":"网络"},{"id":32,"text":"机身内存"}][{"id":1,"text":"联想"},{"id":3,"text":"三星"},{"id":2,"text":"华为"},{"id":5,"text":"OPPO"},{"id":4,"text":"小米"},{"id":9,"text":"苹果"},{"id":8,"text":"魅族"},{"id":6,"text":"360"},{"id":10,"text":"VIVO"},{"id":11,"text":"诺基亚"},{"id":12,"text":"锤子"}][{"text":"内存大小"},{"text":"颜色"}]
+	 * 把该模板的id 对应的品牌列表和规格列表分别存储到redis中 用hash
+	 */
+	private void saveToRedis(){
+		//所有的模板数据
+		List<TbTypeTemplate> all = findAll();
+		//遍历
+		for (TbTypeTemplate tbTypeTemplate : all) {
+			//存储品牌数据 json数据转对象 {"id":1,"text":"联想"},{"id":2,"text":"华为"},{"id":8,"text":"魅族"}
+			List<Map> list = JSON.parseArray(tbTypeTemplate.getBrandIds(), Map.class);
+			//存储品牌    brandList是表 put(key value)
+			redisTemplate.boundHashOps("brandList").put(tbTypeTemplate.getId(),list);
+			//存储规格列表 list[{"id":27,"text":"网络",options["移动3G","移动4G","联通3G","移动4G"]}]
+			List<Map> specList = findSpecList(tbTypeTemplate.getId());//根据模板id查询规格列表
+			redisTemplate.boundHashOps("specList").put(tbTypeTemplate.getId(),specList);
+			System.out.println("品牌和规格存储到redis");
+		}
+
+	}
 	/**
 	 * 查询这个id类型模板的多个规格 及这多个规格对应的多个选项
 	 * 因为在id类型模板typetemplate中有他对应的规格数据 切规格[{"id":27,"text":"网络"},{"id":32,"text":"机身内存"}]
@@ -64,6 +88,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 			//3拼接
 			map.put("options",options);
 		}
+		//list[{"id":27,"text":"网络",options["移动3G","移动4G","联通3G","移动4G"]},{"id":32,"text":"机身内存",options["...","",""]}]
 		return list;
 	}
 
@@ -99,6 +124,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	public PageResult findPage(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);		
 		Page<TbTypeTemplate> page=   (Page<TbTypeTemplate>) typeTemplateMapper.selectByExample(null);
+		saveToRedis();//存入数据到缓存
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
@@ -140,7 +166,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -163,7 +189,8 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	
 		}
 		
-		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
+		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);
+		saveToRedis();//存入数据到缓存
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 

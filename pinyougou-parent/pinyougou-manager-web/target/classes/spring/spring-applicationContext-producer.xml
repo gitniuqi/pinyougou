@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 连接工厂 连接到mq的服务器-->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.25.133:61616"/>
+    </bean>
+    <!--spring用于管理真正的connectionfactory的connectionFactory-->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!--目标connectionFactory对应真实的可以产生jms connection的connectionFactory-->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+    <!--Spring提供的jms工具类-->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+    </bean>
+    <!--创建一个队列目的地 点对点 文本消息-->
+    <bean id="solr_update_index_queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="solr_update_index_queue"/>
+    </bean>
+    <!--配置另外一个队列目的地 是消息订阅 -->
+    <bean id="freemarker_gen_html_topic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="freemarker_gen_html_topic"/>
+    </bean>
+
+
+</beans>

@@ -1,2 +1,7 @@
-com\pinyougou\App.class
 com\pinyougou\utils\FastDFSClient.class
+com\pinyougou\utils\IdWorker.class
+com\pinyougou\utils\PhoneFormatCheckUtils.class
+com\pinyougou\utils\HttpClient$1.class
+com\pinyougou\utils\HttpClient.class
+com\pinyougou\App.class
+com\pinyougou\utils\CookieUtil.class

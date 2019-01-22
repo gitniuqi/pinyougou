@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--配置服务器名字-->
+    <dubbo:application name="pinyougou-order-service"/>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
+
+    <!--配置dubbo服务调用的端口-->
+    <dubbo:protocol name="dubbo" port="20888"/>
+
+    <!--发布服务：注解的方式 扫描对应的包@service-->
+    <dubbo:annotation package="com.pinyougou.order.service"/>
+
+    <!--注册雪花算法-->
+    <bean id="idworker" class="com.pinyougou.utils.IdWorker">
+        <!--进程ID-->
+        <constructor-arg index="0" value="0"></constructor-arg>
+        <!--数据中心Id-->
+        <constructor-arg index="1" value="0"></constructor-arg>
+    </bean>
+</beans>
