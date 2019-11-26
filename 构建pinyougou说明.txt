@@ -5,3 +5,4 @@
         4.jdk 1.7
         5将dubbo jar包放到tomcat的WEB-INF目录下...
         等等等
+测试
