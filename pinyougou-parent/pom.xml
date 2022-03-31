@@ -26,7 +26,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <junit.version>4.12</junit.version>
-    <spring.version>4.3.10.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <pagehelper.version>4.0.0</pagehelper.version>
     <servlet-api.version>2.5</servlet-api.version>
     <dubbo.version>2.5.9</dubbo.version>
