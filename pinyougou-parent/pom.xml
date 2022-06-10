@@ -29,7 +29,7 @@
     <spring.version>4.3.10.RELEASE</spring.version>
     <pagehelper.version>4.0.0</pagehelper.version>
     <servlet-api.version>2.5</servlet-api.version>
-    <dubbo.version>2.5.9</dubbo.version>
+    <dubbo.version>2.6.12</dubbo.version>
     <zookeeper.version>3.4.7</zookeeper.version>
     <zkclient.version>0.1</zkclient.version>
     <mybatis.version>3.2.8</mybatis.version>
